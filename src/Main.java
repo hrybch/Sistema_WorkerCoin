@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Main {
     public static void main(String[] args) {
@@ -81,31 +84,47 @@ public class Main {
                                 System.out.println("Peças Produzidas: " + c.quantidadeProduzida + " | Valor por Peça: R$ " + c.valorPeca);
                             }
 
-                            // Chamamos o método de cálculo matemático lá da classe Colaborador
+                            // Método de Cálculo da classe Colaborador
                             System.out.println("Salário Final: R$ " + c.calcularSalario());
                             System.out.println("-----------------------------------");
                         }
                     }
                     break;
                 case 3:
-                    System.out.println("\n--- EXPORTAÇÃO XML ---");
+                    System.out.println("\n--- GERANDO ARQUIVO XML ---");
                     if (listaColaboradores.isEmpty()) {
-                        System.out.println("<folhaPagamento>");
-                        System.out.println("  <erro>Nenhum dado encontrado</erro>");
-                        System.out.println("</folhaPagamento>");
+                        System.out.println("Nenhum colaborador cadastrado!");
                     } else {
-                        // Gerando a visualização no formato de tags XML
-                        System.out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-                        System.out.println("<folhaPagamento>");
-                        for (Colaborador c : listaColaboradores) {
-                            System.out.println("  <colaborador>");
-                            System.out.println("    <nome>" + c.nome + "</nome>");
-                            System.out.println("    <registro>" + c.numeroRegistro + "</registro>");
-                            System.out.println("    <tipoVinculo>" + c.tipoVinculo + "</tipoVinculo>");
-                            System.out.println("    <salarioFinal>" + c.calcularSalario() + "</salarioFinal>");
-                            System.out.println("  </colaborador>");
+                        // Nome do arquivo que será criado
+                        String nomeArquivo = "folha_pagamento.xml";
+
+                        // O 'try-with-resources' abre o arquivo e garante que ele será FECHADO automaticamente no final
+                        try (PrintWriter escritor = new PrintWriter(new FileWriter(nomeArquivo))) {
+
+                            // Começamos a gravar as tags dentro do arquivo usando o 'escritor.println'
+                            escritor.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+                            escritor.println("<folhaPagamento>");
+
+                            for (Colaborador c : listaColaboradores) {
+                                escritor.println("  <colaborador>");
+                                escritor.println("    <nome>" + c.nome + "</nome>");
+                                escritor.println("    <registro>" + c.numeroRegistro + "</registro>");
+                                escritor.println("    <tipoVinculo>" + c.tipoVinculo + "</tipoVinculo>");
+                                escritor.println("    <salarioFinal>" + c.calcularSalario() + "</salarioFinal>");
+                                escritor.println("  </colaborador>");
+                            }
+
+                            escritor.println("</folhaPagamento>");
+
+                            // Se chegou até aqui, deu tudo certo!
+                            System.out.println("O arquivo '" + nomeArquivo + "' foi gerado com sucesso!");
+                            System.out.println("Procure por ele na mesma pasta onde estão os arquivos do seu sistema.");
+
+                        } catch (IOException e) {
+                            // Se o Windows bloquear a criação do arquivo ou der ruim no disco, cai aqui
+                            System.out.println("Arquivo XML não foi gerado!");
+                            System.out.println("Erro técnico: " + e.getMessage());
                         }
-                        System.out.println("</folhaPagamento>");
                     }
                     break;
 
