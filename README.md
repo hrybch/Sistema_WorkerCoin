@@ -28,7 +28,7 @@ O Menu Principal consiste em 4 (quatro) opções:
 Gera uma lista de todos os colaboradores cadastrados, junto aos itens calculados para seu salário final - se existentes.
 
 ### 3. Gerar XML da Folha de Pagamento
-Gera a formatação XML para a folha de pagamento ser copiada a um arquivo XML.
+Gera um arquivo XML com a lista dos colaboradores, seu tipo de vínculo e salário final.
 
 ### 4. Sair
 Encerra o sistema e suas dependências.
