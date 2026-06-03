@@ -73,7 +73,7 @@ public class Main {
                     if (listaColaboradores.isEmpty()) {
                         System.out.println("Nenhum colaborador cadastrado!");
                     } else {
-                        // Estrutura de repetição para varrer a lista e imprimir
+                        // Sweep & print
                         for (Colaborador c : listaColaboradores) {
                             System.out.println("Nome: " + c.nome + " | Registro: " + c.numeroRegistro);
                             System.out.println("Salário Base: R$ " + Colaborador.SALARIO_BASE);
@@ -122,7 +122,7 @@ public class Main {
 
                         } catch (IOException e) {
                             // Se o Windows bloquear a criação do arquivo ou der ruim no disco, cai aqui
-                            System.out.println("Arquivo XML não foi gerado!");
+                            System.out.println("Não foi possível gerar o arquivo XML.");
                             System.out.println("Erro técnico: " + e.getMessage());
                         }
                     }
