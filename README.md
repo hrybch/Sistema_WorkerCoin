@@ -5,6 +5,8 @@
 Um sistema simples em Java -- codado no Intellij IDEA -- criado para a trilha de aprendizado do curso de Análise e Desenvolvimento de Sistemas (IBMR).
 
 ## Funcionamento
+Iniciado através do executável _WorkerCoin.bat_, na pasta src.
+
 O Menu Principal consiste em 4 (quatro) opções:
 
 1. Cadastro
